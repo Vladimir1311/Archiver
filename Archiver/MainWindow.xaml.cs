@@ -33,7 +33,7 @@ namespace Archiver
         private void MenuItem_ClickAbout(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = (MenuItem)sender;
-            MessageBox.Show("О программе:" +"\n" +
+            MessageBox.Show("О программе:" + "\n" +
                 "Данный архиватор предназначен для открытия архивов, а также архивирования и " +
                 "разархивирования файлов");
         }
@@ -47,12 +47,11 @@ namespace Archiver
         //Открыть архив
         private void MenuItem_ClickOpenArchive(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            //dlg.FileName = "Document"; // Default file name
+            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
             dlg.DefaultExt = ".zip";
             dlg.Filter = "Zip files (*.zip, *.7z)|*.zip";
-            Nullable<bool> result = dlg.ShowDialog();
-            if (result == true)
+            //Nullable<bool> result = dlg.ShowDialog();
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string filename = dlg.FileName;
                 var dir = new System.IO.DirectoryInfo("C:\\");
@@ -66,18 +65,26 @@ namespace Archiver
         //Распаковать архив
         private void MenuItem_ClickUnarchive(object sender, RoutedEventArgs e)
         {
-            string zipPath = @"c:\Users\gd\Downloads\widgets.zip";
-            string extractPath = @"c:\Users\gd\Desktop\unzip";
-            try
+            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
+            dlg.DefaultExt = ".zip";
+            dlg.Filter = "Zip files (*.zip, *.7z)|*.zip";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ZipFile.ExtractToDirectory(zipPath, extractPath);
-            }
-            catch(IOException ee)
-            {
-                MessageBox.Show("Операция записи не может быть" +
-                " выполнена, потому что указанный " +
-                "файл уже был распакован", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Console.WriteLine(ee.GetType().Name);
+                string fileName = dlg.FileName;
+                string zipPath = System.IO.Path.GetFullPath(fileName);
+                MessageBox.Show(zipPath);
+                string extractPath = @"C:\Users\gd\Desktop\unzip";
+                try
+                {
+                    ZipFile.ExtractToDirectory(zipPath, extractPath);
+                }
+                catch (IOException ee)
+                {
+                    MessageBox.Show("Операция записи не может быть" +
+                    " выполнена, потому что указанный " +
+                    "файл уже был распакован", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Console.WriteLine(ee.GetType().Name);
+                }
             }
         }
 
@@ -95,14 +102,14 @@ namespace Archiver
                 System.Windows.Forms.MessageBoxIcon.Information);
             try
             {
-                if(pathFile == "")
+                if (pathFile == "")
                 {
                     MessageBox.Show("Операция архивации не может быть" +
                     " выполнена, потому что не была выбрана папка для арзивации ",
                     "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     Environment.Exit(0);
                 }
-                string zipPath = pathFile+".zip";
+                string zipPath = pathFile + ".zip";
                 ZipFile.CreateFromDirectory(pathFile, zipPath);
             }
             catch (ArgumentNullException)
@@ -124,4 +131,5 @@ namespace Archiver
         private void MenuItem_ClickArchiveFail(object sender, RoutedEventArgs e)
         {
         }
+    }
 }

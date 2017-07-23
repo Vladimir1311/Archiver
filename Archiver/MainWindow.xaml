@@ -20,7 +20,11 @@
             </MenuItem>
             <MenuItem Header="Распаковать архив" Click="MenuItem_ClickUnarchive">
             </MenuItem>
-            <MenuItem Header="Заархивировать" Click="MenuItem_ClickArchive">
+            <MenuItem Header="Заархивировать">
+                <MenuItem Header="Папку" Click="MenuItem_ClickArchiveDirectory">
+                </MenuItem>
+                <MenuItem Header="Файл" Click="MenuItem_ClickArchiveFail">
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="О программе" Click="MenuItem_ClickAbout">
             </MenuItem>
