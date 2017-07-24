@@ -50,12 +50,12 @@ namespace Archiver
             System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
             dlg.DefaultExt = ".zip";
             dlg.Filter = "Zip files (*.zip, *.7z)|*.zip";
-            //Nullable<bool> result = dlg.ShowDialog();
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string filename = dlg.FileName;
+                MessageBox.Show(filename);
                 var dir = new System.IO.DirectoryInfo("C:\\");
-                FileInfo[] files = dir.GetFiles("*.zip");
+                FileInfo[] files = dir.GetFiles("*.*");
                 listBox1.Items.Clear();
                 listBox1.ItemsSource = files;
                 listBox1.DisplayMemberPath = "Name";
