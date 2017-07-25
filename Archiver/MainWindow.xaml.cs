@@ -29,7 +29,10 @@ namespace Archiver
             InitializeComponent();
         }
 
-        //О программе
+
+        /*
+         * О программе
+         */
         private void MenuItem_ClickAbout(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = (MenuItem)sender;
@@ -38,13 +41,17 @@ namespace Archiver
                 "разархивирования файлов");
         }
 
-        //Выход из программы
+        /*
+         * Выход из программы
+         */ 
         private void MenuItem_ClickExit(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
-        //Открыть архив
+        /*
+         * Открыть архив
+         */
         private void MenuItem_ClickOpenArchive(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
@@ -62,21 +69,25 @@ namespace Archiver
             }
         }
 
-        //Распаковать архив
+        /*
+         * Распаковать архив
+         */
         private void MenuItem_ClickUnarchive(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
             dlg.DefaultExt = ".zip";
-            dlg.Filter = "Zip files (*.zip, *.7z)|*.zip";
+            dlg.Filter = "Архив|*.zip; *.7z; *.rar";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string fileName = dlg.FileName;
                 string zipPath = System.IO.Path.GetFullPath(fileName);
                 MessageBox.Show(zipPath);
-                string extractPath = @"C:\Users\gd\Desktop\unzip";
+                string directiryName = System.IO.Path.GetDirectoryName(fileName);
+                MessageBox.Show(directiryName);
+                //string extractPath = @"C:\Users\gd\Desktop\unzip";
                 try
                 {
-                    ZipFile.ExtractToDirectory(zipPath, extractPath);
+                    ZipFile.ExtractToDirectory(zipPath, directiryName);
                 }
                 catch (IOException ee)
                 {
@@ -88,11 +99,15 @@ namespace Archiver
             }
         }
 
-        //Заархивировать папку
+        /*
+         * /Заархивировать папку
+         */
         private void MenuItem_ClickArchiveDirectory(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog()
-            { SelectedPath = System.Windows.Forms.Application.StartupPath };
+            {
+                SelectedPath = System.Windows.Forms.Application.StartupPath
+            };
             string pathFile = string.Empty;
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -126,6 +141,7 @@ namespace Archiver
                 Console.WriteLine(ee.GetType().Name);
             }
         }
+
 
         //Заархивировать файл
         private void MenuItem_ClickArchiveFail(object sender, RoutedEventArgs e)
