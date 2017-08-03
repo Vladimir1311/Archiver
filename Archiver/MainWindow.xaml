@@ -40,19 +40,9 @@
             </MenuItem>
         </Menu>
         <DockPanel>
-            <TextBox x:Name="PathTextBox" 
-                     DockPanel.Dock="Bottom"
-                     Height="70" 
-                     TextWrapping="Wrap" 
-                     RenderTransformOrigin="0.269,-3.522" Margin="142,0,139,0"/>
             <ListBox x:Name="FilesNamesListBox" 
                      Margin="0,85,0,23"
                      Width="178"/>
         </DockPanel>
-        <!--<TreeView Margin="0, 20, 300, 0" 
-                  Grid.RowSpan="2">
-            <TreeViewItem Header="Содержимое архива">
-            </TreeViewItem>
-        </TreeView>-->
     </Grid>
 </Window>

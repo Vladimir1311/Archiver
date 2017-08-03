@@ -108,7 +108,8 @@ namespace Archiver
                 {
                     MessageBox.Show("Операция записи не может быть" +
                     " выполнена, потому что указанный " +
-                    "файл уже был распакован", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "файл уже был распакован", "Ошибка!", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                     Console.WriteLine(ee.GetType().Name);
                 }
             }
@@ -120,7 +121,8 @@ namespace Archiver
          */
         private void MenuItem_ClickArchiveDirectory(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog()
+            System.Windows.Forms.FolderBrowserDialog fbd = 
+                new System.Windows.Forms.FolderBrowserDialog()
             {
                 SelectedPath = System.Windows.Forms.Application.StartupPath
             };
@@ -129,7 +131,8 @@ namespace Archiver
             {
                 pathFile = fbd.SelectedPath.ToString();
             }
-            System.Windows.Forms.MessageBox.Show(pathFile, "Путь", System.Windows.Forms.MessageBoxButtons.OK,
+            System.Windows.Forms.MessageBox.Show(pathFile, "Путь", 
+                System.Windows.Forms.MessageBoxButtons.OK,
                 System.Windows.Forms.MessageBoxIcon.Information);
             try
             {
@@ -153,7 +156,8 @@ namespace Archiver
             {
                 MessageBox.Show("Операция архивации не может быть" +
                 " выполнена, потому что указанный " +
-                "архив уже был создан", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                "архив уже был создан", "Ошибка!", MessageBoxButton.OK, 
+                MessageBoxImage.Error);
                 Console.WriteLine(ee.GetType().Name);
             }
         }
@@ -194,10 +198,6 @@ namespace Archiver
                     {
                         // копируем байты из одного потока в другой
                         sourceStream.CopyTo(compressionStream);
-                        /*Console.WriteLine("Сжатие файла {0} завершено. " +
-                            "Исходный размер: {1}  сжатый размер: {2}.",
-                            sourceFile, sourceStream.Length.ToString(), 
-                            targetStream.Length.ToString());*/
                         MessageBox.Show("Сжатие файла " + 
                             sourceFile + " завершено.\n Исходный размер: "
                             + sourceStream.Length.ToString() + "\nСжатый размер: "
