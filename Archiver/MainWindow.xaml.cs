@@ -165,6 +165,46 @@ namespace Archiver
         private void MenuItem_ClickArchiveFail(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Здесь будет работать архивирование файла");
+            System.Windows.Forms.OpenFileDialog dlg =
+                new System.Windows.Forms.OpenFileDialog();
+            dlg.DefaultExt = ".*";
+            dlg.Filter = "Все файлы|*.*";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string fileName = dlg.FileName;
+                string path = System.IO.Path.GetFullPath(fileName);
+                MessageBox.Show("Путь: " + path + "\n" +
+                    "Файл: " + fileName);
+                string compressedFile = fileName + ".zip";
+                Compress(fileName, compressedFile);
+            }
+        }
+        public static void Compress(string sourceFile, string compressedFile)
+        {
+            // поток для чтения исходного файла
+            using (FileStream sourceStream = 
+                new FileStream(sourceFile, FileMode.OpenOrCreate))
+            {
+                // поток для записи сжатого файла
+                using (FileStream targetStream = File.Create(compressedFile))
+                {
+                    // поток архивации
+                    using (GZipStream compressionStream = 
+                        new GZipStream(targetStream, CompressionMode.Compress))
+                    {
+                        // копируем байты из одного потока в другой
+                        sourceStream.CopyTo(compressionStream);
+                        /*Console.WriteLine("Сжатие файла {0} завершено. " +
+                            "Исходный размер: {1}  сжатый размер: {2}.",
+                            sourceFile, sourceStream.Length.ToString(), 
+                            targetStream.Length.ToString());*/
+                        MessageBox.Show("Сжатие файла " + 
+                            sourceFile + " завершено.\n Исходный размер: "
+                            + sourceStream.Length.ToString() + "\nСжатый размер: "
+                            + targetStream.Length.ToString());
+                    }
+                }
+            }
         }
     }
 }
