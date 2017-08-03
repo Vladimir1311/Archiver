@@ -9,27 +9,50 @@
         Height="300"
         Width="500">
     <Grid>
-        <Menu>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="245*"/>
+            <RowDefinition Height="24*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.RowSpan="2">
             <MenuItem Header="Файл">
-                <MenuItem Header="Открыть архив" Click="MenuItem_ClickOpenArchive">
+                <MenuItem Header="Открыть архив" 
+                          Click="MenuItem_ClickOpenArchive">
                 </MenuItem>
                 <Separator>
                 </Separator>
-                <MenuItem Header="Выход" Click="MenuItem_ClickExit">
+                <MenuItem Header="Выход" 
+                          Click="MenuItem_ClickExit">
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Распаковать архив" Click="MenuItem_ClickUnarchive">
+            <MenuItem Header="Распаковать архив" 
+                      Click="MenuItem_ClickUnarchive">
             </MenuItem>
             <MenuItem Header="Заархивировать">
-                <MenuItem Header="Папку" Click="MenuItem_ClickArchiveDirectory">
+                <MenuItem Header="Папку" 
+                          Click="MenuItem_ClickArchiveDirectory">
                 </MenuItem>
-                <MenuItem Header="Файл" Click="MenuItem_ClickArchiveFail">
+                <MenuItem Header="Файл" 
+                          Click="MenuItem_ClickArchiveFail">
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="О программе" Click="MenuItem_ClickAbout">
+            <MenuItem Header="О программе" 
+                      Click="MenuItem_ClickAbout">
             </MenuItem>
         </Menu>
-        <ListBox Margin="0,20,200,0" Name="listBox1">
-        </ListBox>
+        <DockPanel>
+            <TextBox x:Name="PathTextBox" 
+                     DockPanel.Dock="Bottom"
+                     Height="70" 
+                     TextWrapping="Wrap" 
+                     RenderTransformOrigin="0.269,-3.522" Margin="142,0,139,0"/>
+            <ListBox x:Name="FilesNamesListBox" 
+                     Margin="0,85,0,23"
+                     Width="178"/>
+        </DockPanel>
+        <!--<TreeView Margin="0, 20, 300, 0" 
+                  Grid.RowSpan="2">
+            <TreeViewItem Header="Содержимое архива">
+            </TreeViewItem>
+        </TreeView>-->
     </Grid>
 </Window>

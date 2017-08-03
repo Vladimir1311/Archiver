@@ -37,9 +37,11 @@ namespace Archiver
         {
             MenuItem menuItem = (MenuItem)sender;
             MessageBox.Show("О программе:" + "\n" +
-                "Данный архиватор предназначен для открытия архивов, а также архивирования и " +
+                "Данный архиватор предназначен для открытия архивов, " +
+                "а также архивирования и " +
                 "разархивирования файлов");
         }
+
 
         /*
          * Выход из программы
@@ -49,32 +51,46 @@ namespace Archiver
             Environment.Exit(0);
         }
 
+
         /*
          * Открыть архив
          */
         private void MenuItem_ClickOpenArchive(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
+            string[] filesnames;
+            System.Windows.Forms.OpenFileDialog dlg =
+                new System.Windows.Forms.OpenFileDialog();
             dlg.DefaultExt = ".zip";
-            dlg.Filter = "Zip files (*.zip, *.7z)|*.zip";
+            dlg.Filter = "Архив|*.zip; *.7z; *.rar";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string filename = dlg.FileName;
-                MessageBox.Show(filename);
-                var dir = new System.IO.DirectoryInfo("C:\\");
-                FileInfo[] files = dir.GetFiles("*.*");
-                listBox1.Items.Clear();
-                listBox1.ItemsSource = files;
-                listBox1.DisplayMemberPath = "Name";
+                string fileName = dlg.FileName;
+                MessageBox.Show(fileName);
+                try
+                {
+                    using (var fstream = File.Open(fileName, FileMode.Open))
+                    {
+                        var arch = new ZipArchive(fstream);
+                        filesnames = arch.Entries.Select(s => s.Name).ToArray();
+                    }
+                    FilesNamesListBox.ItemsSource = filesnames;
+                }
+                catch (ArgumentException r)
+                {
+                    MessageBox.Show("Укажите, пожалуйста, путь до архива! "
+                        + r.GetType().Name);
+                }
             }
         }
+
 
         /*
          * Распаковать архив
          */
         private void MenuItem_ClickUnarchive(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
+            System.Windows.Forms.OpenFileDialog dlg = 
+                new System.Windows.Forms.OpenFileDialog();
             dlg.DefaultExt = ".zip";
             dlg.Filter = "Архив|*.zip; *.7z; *.rar";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -84,7 +100,6 @@ namespace Archiver
                 MessageBox.Show(zipPath);
                 string directiryName = System.IO.Path.GetDirectoryName(fileName);
                 MessageBox.Show(directiryName);
-                //string extractPath = @"C:\Users\gd\Desktop\unzip";
                 try
                 {
                     ZipFile.ExtractToDirectory(zipPath, directiryName);
@@ -99,8 +114,9 @@ namespace Archiver
             }
         }
 
+
         /*
-         * /Заархивировать папку
+         * Заархивировать папку
          */
         private void MenuItem_ClickArchiveDirectory(object sender, RoutedEventArgs e)
         {
@@ -143,9 +159,12 @@ namespace Archiver
         }
 
 
-        //Заархивировать файл
+        /*
+         * Заархивировать файл
+         */
         private void MenuItem_ClickArchiveFail(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Здесь будет работать архивирование файла");
         }
     }
 }
