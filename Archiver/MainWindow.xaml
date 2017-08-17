@@ -10,8 +10,10 @@
         Width="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="245*"/>
-            <RowDefinition Height="24*"/>
+            <RowDefinition Height="245*">
+            </RowDefinition>
+            <RowDefinition Height="24*">
+            </RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.RowSpan="2">
             <MenuItem Header="Файл">
@@ -42,7 +44,8 @@
         <DockPanel>
             <ListBox x:Name="FilesNamesListBox" 
                      Margin="0,85,0,23"
-                     Width="178"/>
+                     Width="178">
+            </ListBox>
         </DockPanel>
     </Grid>
 </Window>

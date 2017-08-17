@@ -65,20 +65,34 @@ namespace Archiver
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string fileName = dlg.FileName;
-                MessageBox.Show(fileName);
-                try
+                string path = System.IO.Path.GetFullPath(fileName);
+                string files = path + "\\*.*";
+                string zipPath = System.IO.Path.GetFullPath(fileName);
+                string directoryName = System.IO.Path.GetDirectoryName(fileName);
+                //ZipFile.ExtractToDirectory(zipPath, directoryName);
+                int count = Directory.GetFiles(directoryName).Length;
+                MessageBox.Show(fileName+"\nПуть: "+path);
+                if(count == 0)
                 {
-                    using (var fstream = File.Open(fileName, FileMode.Open))
-                    {
-                        var arch = new ZipArchive(fstream);
-                        filesnames = arch.Entries.Select(s => s.Name).ToArray();
-                    }
-                    FilesNamesListBox.ItemsSource = filesnames;
+                    FilesNamesListBox.Items.Add("Нету файлов!");
                 }
-                catch (ArgumentException r)
+                else if(count>0)
                 {
-                    MessageBox.Show("Укажите, пожалуйста, путь до архива! "
-                        + r.GetType().Name);
+                    //ZipFile.ExtractToDirectory(zipPath, directoryName);
+                    try
+                    {
+                        using (var fstream = File.Open(fileName, FileMode.Open))
+                        {
+                            var arch = new ZipArchive(fstream);
+                            filesnames = arch.Entries.Select(s => s.Name).ToArray();
+                        }
+                        FilesNamesListBox.ItemsSource = filesnames;
+                    }
+                    catch (ArgumentException r)
+                    {
+                        MessageBox.Show("Укажите, пожалуйста, путь до архива! "
+                            + r.GetType().Name);
+                    }
                 }
             }
         }
@@ -95,20 +109,42 @@ namespace Archiver
             dlg.Filter = "Архив|*.zip; *.7z; *.rar";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                string[] filesnames;
                 string fileName = dlg.FileName;
+                MessageBox.Show(fileName);
                 string zipPath = System.IO.Path.GetFullPath(fileName);
-                MessageBox.Show(zipPath);
-                string directiryName = System.IO.Path.GetDirectoryName(fileName);
-                MessageBox.Show(directiryName);
+                string directoryName = System.IO.Path.GetDirectoryName(fileName);
                 try
                 {
-                    ZipFile.ExtractToDirectory(zipPath, directiryName);
+                    ZipFile.ExtractToDirectory(zipPath, directoryName);
+                    int count = Directory.GetFiles(directoryName).Length;
+                    if (count > 0)
+                    {
+                        try
+                        {
+                            using (var fstream = File.Open(fileName, FileMode.Open))
+                            {
+                                var arch = new ZipArchive(fstream);
+                                filesnames = arch.Entries.Select(s => s.Name).ToArray();
+                            }
+                            FilesNamesListBox.ItemsSource = filesnames;
+                        }
+                        catch (ArgumentException r)
+                        {
+                            MessageBox.Show("Укажите, пожалуйста, путь до архива! "
+                                + r.GetType().Name);
+                        }
+                    }
+                    else if(count == 0)
+                    {
+                        FilesNamesListBox.Items.Add("Нету файлов!");
+                    }
                 }
                 catch (IOException ee)
                 {
                     MessageBox.Show("Операция записи не может быть" +
                     " выполнена, потому что указанный " +
-                    "файл уже был распакован", "Ошибка!", 
+                    "файл уже был распакован", "Ошибка!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                     Console.WriteLine(ee.GetType().Name);
                 }
