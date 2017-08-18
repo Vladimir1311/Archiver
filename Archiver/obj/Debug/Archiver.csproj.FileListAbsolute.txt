@@ -12,3 +12,17 @@ C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\obj\Debug\Archiver.Properties.Re
 C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\obj\Debug\Archiver.csproj.GenerateResource.Cache
 C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\obj\Debug\Archiver.exe
 C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\obj\Debug\Archiver.pdb
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\bin\Debug\Archiver.exe.config
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\bin\Debug\Archiver.exe
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\bin\Debug\Archiver.pdb
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver.csprojResolveAssemblyReference.cache
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\MainWindow.g.cs
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\App.g.cs
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver_MarkupCompile.cache
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver_MarkupCompile.lref
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\MainWindow.baml
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver.g.resources
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver.Properties.Resources.resources
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver.csproj.GenerateResource.Cache
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver.exe
+C:\Users\gd\Desktop\.NET (C#)\Archiver\Archiver\Archiver\obj\Debug\Archiver.pdb

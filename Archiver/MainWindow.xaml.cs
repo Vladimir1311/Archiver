@@ -66,11 +66,11 @@ namespace Archiver
             {
                 string fileName = dlg.FileName;
                 string path = System.IO.Path.GetFullPath(fileName);
-                string files = path + "\\*.*";
                 string zipPath = System.IO.Path.GetFullPath(fileName);
                 string directoryName = System.IO.Path.GetDirectoryName(fileName);
-                //ZipFile.ExtractToDirectory(zipPath, directoryName);
-                int count = Directory.GetFiles(directoryName).Length;
+                string files = directoryName + "\\unarchiver";
+                ZipFile.ExtractToDirectory(zipPath, files);
+                int count = Directory.GetFiles(files).Length;
                 MessageBox.Show(fileName+"\nПуть: "+path);
                 if(count == 0)
                 {
@@ -93,6 +93,7 @@ namespace Archiver
                         MessageBox.Show("Укажите, пожалуйста, путь до архива! "
                             + r.GetType().Name);
                     }
+                    Directory.Delete(files, true);
                 }
             }
         }
