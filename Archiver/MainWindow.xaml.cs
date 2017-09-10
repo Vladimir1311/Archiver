@@ -74,7 +74,15 @@ namespace Archiver
                 MessageBox.Show(fileName+"\nПуть: "+path);
                 if(count == 0)
                 {
-                    FilesNamesListBox.Items.Add("Нету файлов!");
+                    try
+                    {
+                        FilesNamesListBox.Items.Add("Нету файлов!");
+                    }
+                    catch(InvalidOperationException eee)
+                    {
+                        FilesNamesListBox.Items.Add("Архив содержит неизвестные файлы");
+                    }
+                    Directory.Delete(files, true);
                 }
                 else if(count>0)
                 {
@@ -220,6 +228,10 @@ namespace Archiver
                 Compress(fileName, compressedFile);
             }
         }
+
+        /*
+         * Метод зжатия файлов
+         */ 
         public static void Compress(string sourceFile, string compressedFile)
         {
             // поток для чтения исходного файла
